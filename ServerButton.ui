@@ -1,0 +1,43 @@
+@LabelStyle = (
+  VerticalAlignment: Center,
+  FontSize: 13,
+  TextColor: #e6e6e6
+);
+
+@Style = (
+  Default: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.08)
+  ),
+  Hovered: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.15)
+  ),
+  Pressed: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.1)
+  )
+);
+
+@StyleSelected = (
+  Default: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.25)
+  ),
+  Hovered: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.30)
+  ),
+  Pressed: (
+    LabelStyle: @LabelStyle,
+    Background: #ffffff(0.27)
+  )
+);
+
+@Button = TextButton {
+  Anchor: (Height: 40, Bottom: 5);
+  Padding: (Horizontal: 16);
+  Style: @Style;
+};
+
+@Button #Button {}

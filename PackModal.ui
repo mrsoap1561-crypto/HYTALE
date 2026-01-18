@@ -1,0 +1,169 @@
+$AssetEditor = "../Common.ui";
+
+@InputField = TextField {
+  PlaceholderStyle: (RenderItalics: true, TextColor: #747474);
+  Anchor: (Height: 32, Bottom: 5);
+  Background: #000000(0.3);
+  Padding: (Horizontal: 7);
+};
+
+@FieldLabel = Label {
+  Anchor: (Bottom: 3);
+  Style: (FontSize: 12, TextColor: #bbbbbb, RenderBold: true);
+};
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 500, Height: 550);
+    Background: #000000(0.8);
+    OutlineSize: 1;
+    OutlineColor: #ffffff(0.2);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+    }
+
+    Group {
+      Background: #414141(0.9);
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+      Padding: (Full: 12);
+      FlexWeight: 1;
+
+      Label #ErrorMessage {
+        Padding: (Full: 5);
+        Style: (FontSize: 13, RenderBold: true, Wrap: true);
+        Background: #813131;
+        Anchor: (Bottom: 5);
+        Visible: false;
+      }
+
+      Label #ReadOnlyMessage {
+        Padding: (Full: 8);
+        Style: (FontSize: 13, RenderBold: true, Wrap: true, TextColor: #3a2505);
+        Background: #fadd7d(0.71);
+        OutlineSize: 1;
+        OutlineColor: #ff822f(0.68);
+        Anchor: (Bottom: 10);
+        Visible: false;
+        Text: %client.assetEditor.packModal.readOnlyMessage;
+      }
+
+      Label #EditModeNote {
+        Padding: (Full: 8);
+        Style: (FontSize: 12, Wrap: true, TextColor: #cccccc);
+        Background: #ffffff(0.08);
+        OutlineSize: 1;
+        OutlineColor: #ffffff(0.15);
+        Anchor: (Bottom: 10);
+        Visible: false;
+        Text: %client.assetEditor.packModal.editModeNote;
+      }
+
+      Group #IdentifierChangeWarning {
+        Anchor: (Bottom: 10);
+        Background: #8B0000(0.3);
+        OutlineSize: 1;
+        OutlineColor: #FF4444(0.8);
+        Padding: 10;
+        Visible: false;
+
+        Label #IdentifierChangeWarningLabel {
+          Style: (Wrap: true, FontSize: 12, TextColor: #FF6666);
+          Text: %client.assetEditor.packModal.identifierChangeWarning;
+        }
+      }
+
+      @FieldLabel { Text: %client.assetEditor.packModal.field.name; }
+      @InputField #NameInput {
+        PlaceholderText: %client.assetEditor.packModal.field.name.placeholder;
+      }
+
+      @FieldLabel { Text: %client.assetEditor.packModal.field.group; Anchor: (Top: 5, Bottom: 3); }
+      @InputField #GroupInput {
+        PlaceholderText: %client.assetEditor.packModal.field.group.placeholder;
+      }
+
+      @FieldLabel { Text: %client.assetEditor.packModal.field.version; Anchor: (Top: 5, Bottom: 3); }
+      @InputField #VersionInput {
+        PlaceholderText: %client.assetEditor.packModal.field.version.placeholder;
+      }
+
+      @FieldLabel { Text: %client.assetEditor.packModal.field.website; Anchor: (Top: 5, Bottom: 3); }
+      @InputField #WebsiteInput {
+        PlaceholderText: %client.assetEditor.packModal.field.website.placeholder;
+      }
+
+      @FieldLabel { Text: %client.assetEditor.packModal.field.description; Anchor: (Top: 5, Bottom: 3); }
+      @InputField #DescriptionInput {
+        PlaceholderText: %client.assetEditor.packModal.field.description.placeholder;
+        Anchor: (Height: 64, Bottom: 5);
+      }
+
+      Group {
+        LayoutMode: Left;
+        Anchor: (Top: 10, Bottom: 5);
+
+        @FieldLabel { Text: %client.assetEditor.packModal.field.authors; FlexWeight: 1; }
+
+        TextButton #AddAuthorButton {
+          Text: %client.assetEditor.packModal.authors.add;
+          Anchor: (Height: 24);
+          Padding: (Horizontal: 8);
+          Style: (
+            Default: (
+              Background: #ffffff(0.15),
+              LabelStyle: (FontSize: 12, RenderBold: true, Alignment: Center)
+            ),
+            Hovered: (
+              Background: #ffffff(0.25),
+              LabelStyle: (FontSize: 12, RenderBold: true, Alignment: Center)
+            ),
+            Pressed: (
+              Background: #ffffff(0.20),
+              LabelStyle: (FontSize: 12, RenderBold: true, Alignment: Center)
+            )
+          );
+        }
+      }
+
+      Group #AuthorsContainer {
+        LayoutMode: TopScrolling;
+        Anchor: (Height: 150);
+        Background: #000000(0.2);
+        Padding: (Full: 5);
+        ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+
+        Label #NoAuthorsLabel {
+          Text: %client.assetEditor.packModal.authors.empty;
+          Style: (FontSize: 12, RenderItalics: true, TextColor: #888888, Alignment: Center, VerticalAlignment: Center);
+          Anchor: (Height: 30);
+        }
+      }
+    }
+
+    Group {
+      LayoutMode: Right;
+      Anchor: (Height: 50);
+      Background: #414141(0.9);
+      Padding: (Full: 8);
+
+      $AssetEditor.@PrimaryTextButton #SaveButton {
+        @Anchor = (Right: 5);
+        Text: %client.assetEditor.packModal.button.save;
+      }
+
+      $AssetEditor.@TextButton #CancelButton {
+        Text: %client.general.button.cancel;
+      }
+    }
+  }
+}

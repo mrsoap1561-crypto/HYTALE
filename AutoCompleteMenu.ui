@@ -1,0 +1,19 @@
+@LabelStyle = LabelStyle(
+  VerticalAlignment: Center,
+  FontSize: 14
+);
+
+@ButtonPadding = Padding(Left: 5);
+@ButtonAnchor = Anchor(Height: 20);
+
+@ButtonStyle = TextButtonStyle(
+  Default: (LabelStyle: @LabelStyle),
+  Hovered: (LabelStyle: @LabelStyle, Background: #222222),
+  Pressed: (LabelStyle: @LabelStyle, Background: #333333)
+);
+
+@ButtonFocusedStyle = TextButtonStyle(
+  Default: (LabelStyle: @LabelStyle, Background: #575757),
+  Hovered: (LabelStyle: @LabelStyle, Background: #5f5e5e),
+  Pressed: (LabelStyle: @LabelStyle, Background: #757474)
+);

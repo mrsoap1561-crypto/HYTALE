@@ -1,0 +1,19 @@
+Group {
+  LayoutMode: Left;
+  Padding: (Vertical: 2);
+  Anchor: (Bottom: 1);
+  Background: #ffffff(0.07);
+
+  TextButton #RemoveButton {
+    Text: "x";
+    Anchor: (Width: 24);
+    Style: (
+      Default: (LabelStyle: (Alignment: Center, FontSize: 14, RenderBold: true))
+    );
+  }
+
+  Label #PropertyLabel {
+    FlexWeight: 1;
+    Style: (FontSize: 14);
+  }
+}

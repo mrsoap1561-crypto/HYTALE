@@ -1,0 +1,51 @@
+$AssetEditor = "../Common.ui";
+
+@CloseButtonLabelStyle = (Alignment: Center, RenderBold: true);
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 700);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Group {
+      LayoutMode: Left;
+      Anchor: (Bottom: 1);
+
+      Label #Title {
+        Anchor: (Height: 40);
+        Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+        Padding: (Left: 12);
+        Background: #757474(0.9);
+        FlexWeight: 1;
+        Text: %client.assetEditor.changelogModal.title;
+      }
+
+      TextButton #CloseButton {
+        Anchor: (Width: 40, Height: 40, Left: 1);
+        Text: "x";
+        Style: (
+          Default: (LabelStyle: @CloseButtonLabelStyle, Background: #757474(0.9)),
+          Hovered: (LabelStyle: @CloseButtonLabelStyle, Background: #757474(1)),
+          Pressed: (LabelStyle: @CloseButtonLabelStyle, Background: #757474(0.95))
+        );
+      }
+    }
+
+    Group #Log {
+      LayoutMode: TopScrolling;
+      Padding: (Full: 12);
+      Anchor: (Height: 500);
+      Background: #414141(0.9);
+      ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+
+      $AssetEditor.@Spinner {
+        @Anchor = (Top: 150);
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Group {
+  LayoutMode: Left;
+
+  Group {
+    Anchor: (Width: 4, Height: 4, Left: 10, Right: 6, Top: 12);
+    Background: #ffffff;
+  }
+
+  Label #Text {
+    FlexWeight: 1;
+    Style: (FontSize: 14, Wrap: true, TextColor: #ffffff(0.86));
+    Padding: 4;
+  }
+}

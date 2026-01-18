@@ -1,0 +1,177 @@
+$AssetEditor = "../Common.ui";
+
+@InputGroup = Group {
+  @Label = "";
+  @Min = 0;
+  @Max = 0;
+  @Step = 0.1;
+  @SliderStep = 1000;
+  @MaxDecimalPlaces = 3;
+  @Value = 0;
+
+  LayoutMode: Left;
+  Anchor: (Bottom: 5);
+
+  Label {
+    Text: @Label;
+    Anchor: (Width: 180);
+    Style: (FontSize: 13, VerticalAlignment: Center);
+  }
+
+  Slider #Slider {
+    Anchor: (Height: 12);
+    FlexWeight: 1;
+    Value: @Value * 1000;
+    Min: @Min * 1000;
+    Max: @Max * 1000;
+    Step: @SliderStep;
+    Style: (
+      Background: #ffffff(0.15),
+      Fill: #ffffff(0.4),
+      Handle: #bdbcbc,
+      HandleWidth: 20,
+      HandleHeight: 20
+    );
+  }
+
+  NumberField #NumberField {
+    Anchor: (Width: 60, Left: 10, Height: 30);
+    Background: #ffffff(0.1);
+    Style: (FontSize: 13);
+    PlaceholderStyle: (FontSize: 13);
+    Padding: (Horizontal: 4);
+    Value: @Value;
+    Format: (
+      MinValue: @Min,
+      MaxValue: @Max,
+      Step: @Step,
+      MaxDecimalPlaces: @MaxDecimalPlaces
+    );
+  }
+};
+
+@Separator = Group { Anchor: (Height: 1, Vertical: 5); Background: #ffffff(0.4); };
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 800);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+      Text: "Icon";
+    }
+
+    Group {
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+
+      Label #ErrorMessage {
+        Padding: (Full: 5);
+        Style: (FontSize: 13, RenderBold: true);
+        Background: #813131;
+        Anchor: (Bottom: 5);
+        Visible: false;
+      }
+
+      Group #Editor {
+        LayoutMode: Left;
+
+        Group {
+          FlexWeight: 1;
+          LayoutMode: Top;
+          Anchor: (Right: 15);
+
+          Group #CopyProperties {
+            LayoutMode: Left;
+            Anchor: (Bottom: 5, Height: 30);
+
+            Label {
+              Text: "Copy Properties from";
+              Anchor: (Width: 180);
+              Style: (FontSize: 13, VerticalAlignment: Center);
+            }
+          }
+
+          Group #FilePath {
+            LayoutMode: Left;
+            Anchor: (Bottom: 5);
+
+            Label {
+              Text: "File Path";
+              Anchor: (Width: 180);
+              Style: (FontSize: 13, VerticalAlignment: Center);
+            }
+
+            TextField #FilePathField {
+              Anchor: (Height: 30);
+              Background: #ffffff(0.1);
+              Style: (FontSize: 12);
+              Padding: (Horizontal: 6);
+              FlexWeight: 1;
+            }
+          }
+
+          @InputGroup #PreviewZoom { @Label = %client.assetEditor.iconExporterModal.previewZoom; @Min = 100; @Max = 300; @MaxDecimalPlaces = 2; @Step = 1; @Value = 300; @Suffix = "%"; }
+
+          @Separator {}
+
+          @InputGroup #TranslationX { @Label = %client.assetEditor.iconExporterModal.translationX; @Min = -150; @Max = 150; }
+          @InputGroup #TranslationY { @Label = %client.assetEditor.iconExporterModal.translationY; @Min = -150; @Max = 150; }
+
+          @Separator {}
+
+          @InputGroup #RotationX { @Label = %client.assetEditor.iconExporterModal.rotationX; @Min = 0; @Max = 360; @Step = 1; }
+          @InputGroup #RotationY { @Label = %client.assetEditor.iconExporterModal.rotationY; @Min = 0; @Max = 360; @Step = 1; }
+          @InputGroup #RotationZ { @Label = %client.assetEditor.iconExporterModal.rotationZ; @Min = 0; @Max = 360; @Step = 1; }
+
+          @Separator {}
+
+          @InputGroup #Scale { @Label = %client.assetEditor.iconExporterModal.scale; @Min = 0; @Max = 2.5; @SliderStep = 100; }
+        }
+
+        Group {
+          Anchor: (Width: 74 * 3, Height: 74 * 3);
+
+          Group #PreviewFrame {
+            Background: "Slot.png";
+
+            Group {
+              Background: "SlotJunk.png";
+
+              Group #PreviewArea {}
+            }
+          }
+        }
+      }
+
+      Group {
+        LayoutMode: Right;
+        Anchor: (Top: 10);
+
+        $AssetEditor.@PrimaryTextButton #SaveButton {
+          @Anchor = (Right: 5);
+          Text: %client.assetEditor.iconExporterModal.export;
+        }
+
+        $AssetEditor.@TextButton #ResetButton {
+          @Anchor = (Right: 5);
+          Text: %client.assetEditor.iconExporterModal.reset;
+        }
+
+        $AssetEditor.@TextButton #CancelButton {
+          Text: %client.general.button.cancel;
+        }
+      }
+    }
+  }
+}

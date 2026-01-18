@@ -1,0 +1,274 @@
+$AssetEditor = "../Common.ui";
+
+@FieldLabel = Label {
+  Anchor: (Width: 160, Right: 5);
+  Style: (FontSize: 14, VerticalAlignment: Center);
+  Padding: (Left: 9);
+};
+
+@FileDropdownBoxStyle = $AssetEditor.@FileDropdownBoxStyle;
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 1100);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+    }
+
+    Group {
+      LayoutMode: Left;
+      Anchor: (Height: 400);
+
+      Group {
+        Background: #414141(0.9);
+        LayoutMode: Top;
+        Padding: (Full: 12);
+        FlexWeight: 1;
+        Anchor: (Right: 1);
+
+        Label #ErrorMessage {
+          Padding: (Full: 5);
+          Style: (FontSize: 13, RenderBold: true, Wrap: true);
+          Background: #813131;
+          Anchor: (Bottom: 8);
+          Visible: false;
+        }
+
+        Group #AssetPack {
+          LayoutMode: Left;
+          Anchor: (Height: 32, Bottom: 1);
+          Background: #ffffff(0.1);
+
+          @FieldLabel {
+            Text: %client.assetEditor.createAssetModal.assetPack;
+          }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+
+          DropdownBox #AssetPackDropdown {
+            Style: $AssetEditor.@DropdownBoxStyle;
+            FlexWeight: 1;
+            ShowSearchInput: true;
+            Anchor: (Height: 32);
+            NoItemsText: %client.assetEditor.createAssetModal.assetPackDropdown.noEntries;
+          }
+        }
+
+        Group #AssetTypeGroup {
+          LayoutMode: Left;
+          Anchor: (Bottom: 1);
+          Background: #ffffff(0.1);
+
+          @FieldLabel {
+            Text: %client.assetEditor.createAssetModal.assetType;
+          }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+
+          DropdownBox #AssetTypeDropdownBox {
+            Style: $AssetEditor.@DropdownBoxStyle;
+            FlexWeight: 1;
+            ShowSearchInput: true;
+            Anchor: (Height: 32);
+          }
+        }
+
+        Group #FolderGroup {
+          LayoutMode: Left;
+          Anchor: (Height: 32, Bottom: 1);
+          Background: #ffffff(0.1);
+
+          @FieldLabel {
+            Text: %client.assetEditor.createAssetModal.folder;
+          }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+        }
+
+        Group #AssetIdGroup {
+          LayoutMode: Left;
+          Anchor: (Height: 32, Bottom: 1);
+          Background: #ffffff(0.1);
+
+          @FieldLabel {
+            Text: %client.assetEditor.createAssetModal.assetId;
+          }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+
+          TextField #AssetIdInput {
+            FlexWeight: 1;
+            Padding: (Left: 5);
+            Style: (FontSize: 13);
+          }
+        }
+
+        Group {
+          LayoutMode: Left;
+          Background: #ffffff(0.1);
+          Anchor: (Bottom: 1);
+
+          Group { Anchor: (Width: 160, Right: 5); }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+
+          Label {
+            FlexWeight: 1;
+            Padding: (Bottom: 30, Left: 7, Top: 5);
+            Text: %client.assetEditor.createAssetModal.assetIdHelp;
+            Style: (
+              FontSize: 12,
+              TextColor: #afafaf,
+              Wrap: true
+            );
+          }
+        }
+
+        Group #CopyAssetGroup {
+          LayoutMode: Left;
+          Anchor: (Height: 32, Bottom: 1);
+          Background: #ffffff(0.1);
+
+          @FieldLabel {
+            Text: %client.assetEditor.createAssetModal.copyAsset;
+          }
+
+          Group {
+            Anchor: (Width: 1);
+            Background: #000000(0.2);
+          }
+
+          TextButton #CopyAssetClearButton {
+            Text: "x";
+            Background: #ffffff(0.1);
+            Anchor: (Width: 32, Right: 1);
+            Padding: (Bottom: 2);
+            Style: (
+              Default: (LabelStyle: (Alignment: Center, RenderBold: true))
+            );
+          }
+        }
+
+        Group { FlexWeight: 1; }
+
+        Group {
+          LayoutMode: Right;
+          Anchor: (Top: 10);
+          Background: #ffffff(0.1);
+          Padding: (Full: 10);
+
+          $AssetEditor.@PrimaryTextButton #SaveButton {
+            @Anchor = (Right: 5, MinWidth: 120);
+            Text: %client.assetEditor.createAssetModal.createButton;
+          }
+
+          $AssetEditor.@TextButton #CancelButton {
+            @Anchor = (MinWidth: 120);
+            Text: %client.general.button.cancel;
+          }
+        }
+      }
+
+      Group {
+        Anchor: (Width: 550);
+        Background: #414141(0.9);
+        LayoutMode: Top;
+
+        TabNavigation #Tabs {
+          @StyleState = (
+            LabelStyle: (FontSize: 12, RenderBold: true),
+            Padding: (Full: 10)
+          );
+
+          Style: (
+            TabStyle: (
+              Default: @StyleState,
+              Hovered: (
+                ...@StyleState,
+                Background: #ffffff(0.05)
+              ),
+              Pressed: (
+                ...@StyleState,
+                Background: #ffffff(0.02)
+              )
+            ),
+            SelectedTabStyle: (
+              Default: (
+                ...@StyleState,
+                Background: #ffffff(0.15)
+              )
+            )
+          );
+
+          TabButton {
+            Text: %client.assetEditor.createAssetModal.tab.properties;
+            Id: "Properties";
+            FlexWeight: 1;
+          }
+
+          TabButton {
+            Text: %client.assetEditor.createAssetModal.tab.source;
+            Id: "Source";
+            FlexWeight: 1;
+          }
+        }
+
+        Group {
+          Anchor: (Height: 1);
+          Background: #000000(0.4);
+        }
+
+        Group #PropertyList {
+          LayoutMode: TopScrolling;
+          ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+          FlexWeight: 1;
+          Padding: (Full: 10);
+        }
+
+        Label #SourceErrorMessage {
+          Padding: (Full: 5);
+          Style: (FontSize: 13, RenderBold: true);
+          Background: #813131;
+          Visible: false;
+          Text: %client.assetEditor.errors.invalidJson;
+        }
+
+        Group #SourceEditor {
+          FlexWeight: 1;
+          Background: #000000(0.2);
+
+          CodeEditor #CodeEditor {
+            FlexWeight: 1;
+            Padding: 10;
+            Style: (TextColor: #ffffff(0.9), FontSize: 14);
+          }
+        }
+      }
+    }
+  }
+}

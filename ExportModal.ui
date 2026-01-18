@@ -1,0 +1,136 @@
+$AssetEditor = "../Common.ui";
+
+Group #Overlay {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 1200);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+      Text: %client.assetEditor.exportModal.title;
+    }
+
+    Group {
+      Anchor: (Height: 550);
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+      FlexWeight: 1;
+
+      Label #ErrorMessage {
+        Padding: (Full: 5);
+        Style: (FontSize: 13, RenderBold: true);
+        Background: #813131;
+        Anchor: (Bottom: 8);
+        Visible: false;
+      }
+
+      Group {
+        LayoutMode: Left;
+        Background: #000000(0.2);
+        Anchor: (Bottom: 3);
+        Padding: (Vertical: 4, Right: 12);
+
+        Label {
+          Anchor: (Left: 5);
+          Style: (FontSize: 13, TextColor: #cccccc);
+          Text: %client.assetEditor.exportModal.columns.file;
+        }
+
+        Group {
+          FlexWeight: 1;
+        }
+
+        Label {
+          Style: (FontSize: 13, TextColor: #cccccc);
+          Text: %client.assetEditor.exportModal.columns.lastChangeDate;
+          Anchor: (Width: 160);
+        }
+
+        Label {
+          Style: (FontSize: 13, TextColor: #cccccc);
+          Text: %client.assetEditor.exportModal.columns.lastChangeUsername;
+          Anchor: (Width: 130);
+        }
+
+        Group {
+          Anchor: (Width: 24);
+        }
+      }
+
+      Group #Entries {
+        FlexWeight: 1;
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+      }
+
+      CheckBoxContainer #DiscardContainer {
+        LayoutMode: Left;
+        Anchor: (Top: 9);
+        Background: #ffffff(0.1);
+        OutlineSize: 1;
+        OutlineColor: #ffffff(0.2);
+        Padding: 8;
+
+        CheckBox #DiscardCheckBox {
+          Style: $AssetEditor.@CheckBoxStyle;
+          Anchor: (Width: 24, Height: 24, Right: 7);
+        }
+
+        Group {
+          LayoutMode: Top;
+          FlexWeight: 1;
+
+          Label {
+            Text: %client.assetEditor.exportModal.discardChangesCheckBox;
+            Style: (FontSize: 14, TextColor: #dddddd, RenderBold: true);
+          }
+
+          Label {
+            Text: %client.assetEditor.exportModal.discardChangesCheckBoxDescription;
+            Style: (FontSize: 12, TextColor: #b1b1b1, Wrap: true);
+          }
+        }
+      }
+
+      Group {
+        LayoutMode: Left;
+        Anchor: (Top: 10);
+        Background: #ffffff(0.1);
+        Padding: (Full: 10);
+
+        $AssetEditor.@TextButton #DeselectAllButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.assetEditor.exportModal.deselectAllButton;
+        }
+
+        $AssetEditor.@TextButton #SelectAllButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.assetEditor.exportModal.selectAllButton;
+        }
+
+        Group {
+          FlexWeight: 1;
+        }
+
+        $AssetEditor.@PrimaryTextButton #ExportButton {
+          @Anchor = (Right: 5, MinWidth: 180);
+          Text: %client.assetEditor.exportModal.exportButton;
+        }
+
+        $AssetEditor.@TextButton #CancelButton {
+          @Anchor = (MinWidth: 150);
+          Text: %client.general.button.cancel;
+        }
+      }
+    }
+  }
+}

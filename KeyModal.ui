@@ -1,0 +1,51 @@
+$AssetEditor = "../Common.ui";
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 500);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+    }
+
+    Group {
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+
+      Label #ErrorMessage {
+        Padding: (Full: 5);
+        Style: (FontSize: 13, RenderBold: true);
+        Background: #813131;
+        Anchor: (Bottom: 5);
+      }
+
+      Group #InputContainer {
+        Anchor: (Height: 38);
+        Background: #ffffff(0.1);
+      }
+
+      Group {
+        LayoutMode: Right;
+        Anchor: (Top: 10);
+
+        $AssetEditor.@PrimaryTextButton #SaveButton {
+          @Anchor = (Right: 5);
+        }
+
+        $AssetEditor.@TextButton #CancelButton {
+          Text: %client.general.button.cancel;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+$AssetEditor = "../Common.ui";
+
+@Button = TextButton {
+  Anchor: (Right: 5);
+  Padding: (Horizontal: 12);
+  Style: (
+    Default: (
+      LabelStyle: (VerticalAlignment: Center),
+      Background: #000000(0.3)
+    ),
+    Hovered: (
+      LabelStyle: (VerticalAlignment: Center),
+      Background: #000000(0.2)
+    ),
+    Pressed: (
+      LabelStyle: (VerticalAlignment: Center),
+      Background: #000000(0.25)
+    ),
+    Disabled: (
+      LabelStyle: (VerticalAlignment: Center, TextColor: #ffffff(0.2)),
+      Background: #000000(0.1)
+    )
+  );
+};
+
+$AssetEditor.@CurrentAssetTitle #CurrentAsset { }
+
+Group {
+  Background: #575757;
+  Anchor: (Height: 1);
+}
+
+Group #Header {
+  Anchor: (Height: 43);
+  LayoutMode: Left;
+  Padding: (Full: 4);
+
+  @Button #ApplyButton {
+    Text: %client.assetEditor.sourceEditor.apply;
+  }
+
+  @Button #DiscardButton {
+    Text: %client.assetEditor.sourceEditor.discard;
+  }
+}
+
+Label #ErrorMessage {
+  Padding: (Full: 5);
+  Style: (FontSize: 13, RenderBold: true);
+  Background: #813131;
+  Visible: false;
+}
+
+Group #Content {
+  FlexWeight: 1;
+  Background: #000000(0.2);
+
+  CodeEditor #CodeEditor {
+    FlexWeight: 1;
+    Style: (TextColor: #ffffff(0.9), FontSize: 14);
+    ContentPadding: 10;
+  }
+}

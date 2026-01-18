@@ -1,0 +1,28 @@
+$AssetEditor = "../Common.ui";
+
+@DefaultStyle = (
+  Hovered: (Background: #ffffff(0.05)),
+  Pressed: (Background: #ffffff(0.02))
+);
+
+@SelectedStyle = (
+  Default: (Background: #ffffff(0.3)),
+  Hovered: (Background: #ffffff(0.4)),
+  Pressed: (Background: #ffffff(0.35))
+);
+
+Button #Button {
+  LayoutMode: Left;
+  Anchor: (Bottom: 3);
+  Padding: (Vertical: 2);
+  Style: @DefaultStyle;
+
+  Group #Icon {
+    Anchor: (Width: 22, Height: 22, Left: 10);
+  }
+
+  Label #NameLabel {
+    Anchor: (Left: 5);
+    Style: (FontSize: 14, VerticalAlignment: Center, TextColor: #ffffff);
+  }
+}

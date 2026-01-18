@@ -1,0 +1,26 @@
+Group {
+  LayoutMode: Left;
+  Padding: 5;
+
+  Label #Version {
+    Style: (FontSize: 16, RenderBold: true);
+  }
+
+  Label #NewLabel {
+    Anchor: (Left: 7, Height: 18);
+    Style: (FontSize: 11, RenderBold: true, RenderItalics: true, VerticalAlignment: Center, TextColor: #ffffff);
+    Text: %client.assetEditor.changelogModal.newVersion;
+    Background: #e75550(0.86);
+    Padding: (Horizontal: 3);
+  }
+
+  Label #Date {
+    FlexWeight:1;
+    Style: (FontSize: 12, RenderBold: true, RenderItalics: true, HorizontalAlignment: End, VerticalAlignment: Center, TextColor: #ffffff(0.86));
+  }
+}
+
+Group {
+  Background: #ffffff(0.35);
+  Anchor: (Height: 1);
+}

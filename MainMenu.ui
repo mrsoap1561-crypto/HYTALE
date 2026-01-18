@@ -1,0 +1,304 @@
+$ServerButton = "ServerButton.ui";
+
+@ScrollbarSize = 8;
+@ScrollbarSpace = 5;
+@ScrollbarStyle = ScrollbarStyle(
+  Spacing: @ScrollbarSpace,
+  Size: @ScrollbarSize,
+  Background: #777777(0.4),
+  Handle: #ccccccff,
+  HoveredHandle: #eeeeeeff,
+  DraggedHandle: #aaaaaaff
+);
+
+@ServerActionButton = TextButton {
+  @FontSize = 12;
+  @HorizontalAlignment = Start;
+  @LabelStyle = (
+    VerticalAlignment: Center,
+    HorizontalAlignment: @HorizontalAlignment,
+    FontSize: @FontSize,
+    RenderBold: true,
+    TextColor: #f4bc51,
+    RenderUppercase: true
+  );
+
+  Padding: (Horizontal: 5);
+  Anchor: (Left: 5);
+  Style: (
+    Default: (
+      Background: #f4bc51(0.1),
+      LabelStyle: @LabelStyle
+    ),
+    Hovered: (
+      Background: #f4bc51(0.2),
+      LabelStyle: @LabelStyle
+    ),
+    Pressed: (
+      Background: #f4bc51(0.15),
+      LabelStyle: @LabelStyle
+    )
+  );
+};
+
+Group {
+  Background: #292929;
+  LayoutMode: Middle;
+
+  Group {
+    Anchor: (Height: 5, Width: 600);
+    Background: #f4bc51;
+  }
+
+  Group {
+    LayoutMode: Left;
+    Anchor: (Width: 600, Height: 400);
+
+    Group {
+      Padding: 10;
+      Background: #202020;
+
+      Group {
+        Background: "Icon.png";
+        Anchor: (Top: 10, Width: 120, Height: 120);
+      }
+    }
+
+    Group {
+      FlexWeight: 1;
+      Background: #444444;
+      LayoutMode: Top;
+
+      Group {
+        Background: #000000(0);
+        Anchor: (Height: 45);
+        LayoutMode: Left;
+        Padding: (Full: 10, Bottom: 5);
+
+        Label {
+          Text: %client.assetEditor.mainMenu.title;
+          FlexWeight: 1;
+          Padding: (
+            Left: 5
+          );
+          Style: (
+            VerticalAlignment: Center,
+            TextColor: #f4bc51,
+            RenderBold: true,
+            FontSize: 15
+          );
+        }
+
+        TextButton #SettingsButton {
+          Text: %client.assetEditor.mainMenu.settingsButton;
+          Background: #f4bc51(0.1);
+          Padding: (Horizontal: 6);
+          Style: (
+            Default: (
+              LabelStyle: (
+                Alignment: Center,
+                FontSize: 13,
+                RenderBold: true,
+                TextColor: #f4bc51
+              )
+            )
+          );
+        }
+      }
+
+      Group {
+        LayoutMode: Top;
+        FlexWeight: 1;
+        Padding: 10;
+
+        $ServerButton.@Button #CosmeticsEditorButton {
+          Text: %client.assetEditor.mainMenu.cosmeticsEditor;
+          Visible: false;
+        }
+
+        Group #CosmeticsEditorButtonSeparator {
+          Anchor: (Height: 1, Bottom: 10, Top: 5);
+          Background: #ffffff(0.1);
+          Visible: false;
+        }
+
+        Group {
+          LayoutMode: Left;
+          Anchor: (Bottom: 5);
+
+          Label {
+            Text: %client.assetEditor.mainMenu.servers;
+            Padding: (Left: 5);
+            FlexWeight: 1;
+            Style: (
+              VerticalAlignment: Center,
+              TextColor: #e9e9e9,
+              RenderBold: true,
+              FontSize: 13
+            );
+          }
+
+          @ServerActionButton #EditServerButton {
+            Text: %client.general.button.edit;
+          }
+
+          @ServerActionButton #RemoveServerButton {
+            Text: %client.general.button.remove;
+          }
+
+          @ServerActionButton #AddServerButton {
+            @FontSize = 18;
+            @HorizontalAlignment = Center;
+
+            Text: "+";
+            Anchor: (Width: 25, Left: 5);
+          }
+        }
+
+        Group #ServerList {
+          FlexWeight: 1;
+          LayoutMode: TopScrolling;
+          ScrollbarStyle: @ScrollbarStyle;
+        }
+      }
+    }
+  }
+
+  Group {
+    Anchor: (Height: 1, Width: 600);
+    Background: #2c2c2c;
+  }
+
+  Group {
+    Anchor: (Height: 40, Width: 600);
+    Background: #444444;
+    LayoutMode: Left;
+    Padding: 10;
+
+    Label #ConnectionStatusLabel {
+      Padding: (Horizontal: 4);
+      FlexWeight: 1;
+      Style: (
+        VerticalAlignment: Center,
+        RenderItalics: true,
+        FontSize: 12,
+        TextColor: #b8b8b8
+      );
+    }
+
+    Label #ConnectionErrorLabel {
+      Padding: (Horizontal: 4);
+      FlexWeight: 1;
+      Visible: false;
+      Style: (
+        VerticalAlignment: Center,
+        RenderItalics: true,
+        FontSize: 12,
+        TextColor: #f88080
+      );
+    }
+
+    Group #PasswordContainer {
+      LayoutMode: Left;
+      Visible: false;
+
+      TextField #PasswordField {
+        Anchor: (Width: 150, Height: 26, Right: 5);
+        Background: #ffffff;
+        Style: (TextColor: #000000, FontSize: 12);
+        PlaceholderStyle: (TextColor: #999999, RenderItalics: true, FontSize: 12);
+        PlaceholderText: %client.gameLoadingView.password.title;
+        PasswordChar: "*";
+        Padding: (Left: 7);
+      }
+
+      TextButton #SubmitPasswordButton {
+        Text: %client.gameLoadingView.password.submit;
+        Padding: (Horizontal: 8);
+        Anchor: (Height: 26, Right: 5);
+        Style: (
+          Default: (
+            Background: #ffffff(0.15),
+            LabelStyle: (Alignment: Center, FontSize: 12, RenderBold: true)
+          ),
+          Hovered: (
+            Background: #ffffff(0.25),
+            LabelStyle: (Alignment: Center, FontSize: 12, RenderBold: true)
+          )
+        );
+      }
+    }
+
+    TextButton #CancelConnectionButton {
+      Text: "x";
+      Anchor: (Width: 20, Height: 20);
+      Style: (
+        Default: (
+          Background: #ffffff(0.1),
+          LabelStyle: (
+            Alignment: Center,
+            FontSize: 13,
+            RenderBold: true
+          )
+        )
+      );
+    }
+  }
+}
+
+Group #DisconnectPopup {
+  Background: #c45252;
+  Anchor: (Bottom: 0, Height: 60);
+
+  Group {
+    Anchor: (Width: 600);
+    LayoutMode: Left;
+    Padding: 10;
+
+    Group {
+      FlexWeight: 1;
+      LayoutMode: Top;
+
+      Label {
+        Text: %client.assetEditor.mainMenu.disconnectionContainer.title;
+        Style: (
+          VerticalAlignment: Center,
+          TextColor: #f3cdcd,
+          RenderBold: true,
+          FontSize: 15
+        );
+      }
+
+      Label #DisconnectReason {
+        Style: (
+          TextColor: #500f0f,
+          FontSize: 13
+        );
+      }
+    }
+
+    TextButton #ReconnectButton {
+      Text: %client.assetEditor.mainMenu.disconnectionContainer.reconnect;
+      Padding: 8;
+      Anchor: (Height: 30, Right: 5);
+      Background: #000000(0.2);
+      Style: (
+        Default: (
+          LabelStyle: (Alignment: Center, FontSize: 13)
+        )
+      );
+    }
+
+    TextButton #CloseDisconnectPopupButton {
+      Text: "x";
+      Padding: 8;
+      Anchor: (Width: 30, Height: 30);
+      Background: #000000(0.2);
+      Style: (
+        Default: (
+          LabelStyle: (Alignment: Center, RenderBold: true)
+        )
+      );
+    }
+  }
+}

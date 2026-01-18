@@ -1,0 +1,59 @@
+$Common = "../Common.ui";
+
+@InputPlaceholderStyle = (RenderItalics: true, TextColor: #747474);
+@InputAnchor = (Height: 32, Bottom: 8);
+@InputBackground = #000000(0.3);
+@InputPadding = (Horizontal: 7);
+
+@InputLabel = Label {
+  Style: (FontSize: 12, RenderBold: true, RenderUppercase: true, TextColor: #eeeeee);
+  Anchor: (Bottom: 5);
+};
+
+$Common.@Modal {
+  #Content {
+    $Common.@ModalErrorLabel #ErrorMessage { }
+
+    @InputLabel { Text: "Name"; }
+
+    TextField #NameInput {
+      PlaceholderStyle: @InputPlaceholderStyle;
+      Anchor: @InputAnchor;
+      Background: @InputBackground;
+      Padding: @InputPadding;
+    }
+
+    @InputLabel { Text: "Hostname"; }
+
+    TextField #HostnameInput {
+      PlaceholderStyle: @InputPlaceholderStyle;
+      Anchor: @InputAnchor;
+      Background: @InputBackground;
+      Padding: @InputPadding;
+    }
+
+    @InputLabel { Text: "Port"; }
+
+    NumberField #PortInput {
+      PlaceholderStyle: @InputPlaceholderStyle;
+      Anchor: @InputAnchor;
+      Background: @InputBackground;
+      Padding: @InputPadding;
+      Format: (MinValue: 0);
+    }
+
+    Group {
+      LayoutMode: Right;
+      Anchor: (Top: 10);
+
+      $Common.@PrimaryTextButton #SaveButton {
+        @Anchor = (Right: 5);
+        Text: %client.general.button.add;
+      }
+
+      $Common.@TextButton #CancelButton {
+        Text: %client.general.button.cancel;
+      }
+    }
+  }
+}

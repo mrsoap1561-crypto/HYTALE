@@ -1,0 +1,14 @@
+@BackgroundInfo = #414141(0.85);
+@BackgroundWarning = #ca7631(0.95);
+@BackgroundSuccess = #4eb871(0.95);
+@BackgroundError = #a82929(0.95);
+
+TextButton #Label {
+  Padding: (Full: 8);
+  Anchor: (Top: 5);
+  Style: (
+    Default: (
+      LabelStyle: (Wrap: true, TextColor: #ffffff, RenderBold: true)
+    )
+  );
+}

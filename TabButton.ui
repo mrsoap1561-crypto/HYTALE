@@ -1,0 +1,43 @@
+Group #ActiveTabHighlight {
+  Anchor: (Height: 4, Top: 0);
+  Background: #f4bc51;
+  Visible: false;
+}
+
+Group {
+  LayoutMode: Left;
+  Padding: (Horizontal: 10, Right: 4);
+
+  Group #Icon {
+    Anchor: (Width: 24, Height: 24, Right: 4);
+  }
+
+  Group {
+    LayoutMode: Middle;
+    Padding: (Top: 2);
+
+    Label #Directory {
+      Style: (FontSize: 10, TextColor: #575656, RenderItalics: true);
+    }
+
+    Label #Name {
+      Style: (FontSize: 13, RenderBold: false, TextColor: #575656);
+    }
+  }
+
+  Button #CloseButton {
+    Anchor: (Width: 12, Height: 12, Right: 2);
+    Disabled: true;
+    Style: (
+      Default: (Background: (TexturePath: "../Common/ClearInputIcon.png", Color: #000000(0.5))),
+      Hovered: (Background: (TexturePath: "../Common/ClearInputIcon.png", Color: #000000(0.8))),
+      Pressed: (Background: (TexturePath: "../Common/ClearInputIcon.png", Color: #000000(0.7))),
+      Disabled: (Background: #00000000)
+    );
+  }
+}
+
+Group {
+  Anchor: (Width: 1, Right: 0);
+  Background: #000000(0.2);
+}

@@ -1,0 +1,23 @@
+@ButtonLabelStyle = (
+  FontSize: 13,
+  VerticalAlignment: Center
+);
+
+TextButton #Button {
+  Padding: (Horizontal: 8);
+  Anchor: (Left: 5);
+  Style: (
+    Default: (
+      Background: #ffffff(0.1),
+      LabelStyle: @ButtonLabelStyle
+    ),
+    Hovered: (
+      Background: #ffffff(0.2),
+      LabelStyle: @ButtonLabelStyle
+    ),
+    Pressed: (
+      Background: #ffffff(0.15),
+      LabelStyle: @ButtonLabelStyle
+    )
+  );
+}

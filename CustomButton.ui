@@ -1,0 +1,5 @@
+$AssetEditor = "../Common.ui";
+
+$AssetEditor.@TextButton #Button {
+  @Anchor = (Right: 5, MinWidth: 120);
+}

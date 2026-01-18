@@ -1,0 +1,175 @@
+$AssetEditor = "../Common.ui";
+
+@ButtonLabelStyle = (
+  FontSize: 13,
+  VerticalAlignment: Center,
+  HorizontalAlignment: Center
+);
+
+@Button = Button {
+  Anchor: (Left: 5, Width: 32);
+  Style: (
+    Default: (
+      Background: #ffffff(0)
+    ),
+    Hovered: (
+      Background: #ffffff(0.2)
+    ),
+    Pressed: (
+      Background: #ffffff(0.15)
+    )
+  );
+};
+
+@ToggleButton = ToggleButton {
+  Anchor: (Left: 5, Width: 32);
+  Style: (
+    Default: (
+      Background: #ffffff(0)
+    ),
+    Hovered: (
+      Background: #ffffff(0.2)
+    ),
+    Pressed: (
+      Background: #ffffff(0.15)
+    )
+  );
+  CheckedStyle: (
+     Default: (
+       Background: #ffffff(0.3)
+     ),
+     Hovered: (
+       Background: #ffffff(0.4)
+     ),
+     Pressed: (
+       Background: #ffffff(0.35)
+     )
+   );
+};
+
+Group #Container {
+  LayoutMode: TopScrolling;
+  ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+  Overscroll: true;
+
+  $AssetEditor.@CurrentAssetTitle #CurrentAsset {
+    #Buttons {
+      @Button #CollapseAllButton {
+        @Anchor = (Right: 5, MinWidth: 120);
+        TooltipText: %client.assetEditor.configEditor.button.collapseAll;
+
+        Group {
+          Anchor: (Width: 24, Height: 24);
+          Background: "CollapseAllIcon.png";
+        }
+      }
+
+      @Button #ExpandAllButton {
+        @Anchor = (Right: 5, MinWidth: 120);
+        TooltipText: %client.assetEditor.configEditor.button.expandAll;
+
+        Group {
+          Anchor: (Width: 24, Height: 24);
+          Background: "ExpandAllIcon.png";
+        }
+      }
+
+      @ToggleButton #ShowDefinedPropertiesButton {
+        @Anchor = (Right: 5, MinWidth: 120);
+        TooltipText: %client.assetEditor.configEditor.button.showDefinedProperties;
+
+        Group {
+          Anchor: (Width: 18, Height: 18);
+          Background: "ShowDefinedPropertiesIcon.png";
+        }
+      }
+
+      @Button #QuickInspectButton {
+          @Anchor = (Right: 5, MinWidth: 120);
+          TooltipText: %client.assetEditor.configEditor.button.quickInspect;
+
+          Group {
+            Anchor: (Width: 18, Height: 18);
+            Background: "InspectPropertiesIcon.png";
+          }
+      }
+    }
+  }
+
+  Group {
+    Background: #575757;
+    Anchor: (Height: 1);
+  }
+
+  Group #InheritanceWarning {
+    Background: #c7662e;
+    Padding: (Left: 8, Right: 4);
+    Anchor: (Height: 32);
+    LayoutMode: Left;
+    Visible: false;
+
+    Label {
+      Text: %client.assetEditor.inheritanceWarning.message;
+      Style: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center);
+      FlexWeight: 1;
+    }
+
+    TextButton {
+      Text: "i";
+      Padding: (Horizontal: 10);
+      Anchor: (Height: 24);
+      Style: (
+        Default: (
+          Background: #000000(0.3),
+          LabelStyle: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center, FontSize: 14)
+        )
+      );
+      TooltipText: %client.assetEditor.inheritanceWarning.tooltip;
+    }
+  }
+
+  TextField #PropertySearchInput {
+    Anchor: (Height: 38);
+    Padding: (Horizontal: 27);
+    Background: #ffffff(0.2);
+    PlaceholderText: %client.assetEditor.editor.searchProperties;
+    PlaceholderStyle: (
+      TextColor: #ffffff(0.4),
+      RenderItalics: true,
+      FontSize: 14
+    );
+    Style: (FontSize: 14);
+    Decoration: (
+      Default: (
+        Icon: (Texture: (TexturePath: "../Common/SearchIcon.png", Color: #ffffff(0.25)), Width: 14, Height: 14, Offset: 8),
+        ClearButtonStyle: $AssetEditor.@ClearButtonStyle
+      ),
+      Focused: (
+        OutlineSize: 1,
+        OutlineColor: #f4bc51(0.6),
+        Icon: (Texture: (TexturePath: "../Common/SearchIcon.png", Color: #def7fc(0.65)), Width: 14, Height: 14, Offset: 8)
+      )
+    );
+  }
+
+  Group {
+    Anchor: (Height: 1);
+    Background: #616161;
+  }
+
+  Group #Properties {
+    LayoutMode: Top;
+  }
+
+  Label #ErrorLabel {
+    Style: (Alignment: Center, RenderBold: true);
+    Anchor: (Height: 500);
+  }
+}
+
+Panel #LoadingOverlay {
+  Background: #000000(0.3);
+  Visible: false;
+
+  $AssetEditor.@Spinner {}
+}

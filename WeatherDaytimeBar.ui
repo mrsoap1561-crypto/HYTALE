@@ -1,0 +1,87 @@
+$AssetEditor = "../Common.ui";
+
+@HourEntryWidth = 28;
+
+@HourSep = Group {
+  Anchor: (Height: 8, Width: 1, Left: (@HourEntryWidth / 2) + (@HourEntryWidth * @Hour), Bottom: 3);
+  Background: #ffffff(0.3);
+};
+
+@HourLabel = Label {
+  Anchor: (Height: 8, Width: @HourEntryWidth, Left: (@HourEntryWidth * @Hour), Bottom: 18);
+  Style: (FontSize: 11, HorizontalAlignment: Center);
+};
+
+Group {
+  Anchor: (Height: 35);
+  Background: #000000(0.3);
+
+  Group {
+    Anchor: (Left: $AssetEditor.@ScrollbarSize + $AssetEditor.@ScrollbarSpace);
+    Padding: (Right: 26);
+
+    Group #Timeline {
+      Anchor: (Bottom: 1, Width: 24 * @HourEntryWidth);
+
+      @HourSep { @Hour = 0; }
+      @HourSep { @Hour = 1; }
+      @HourSep { @Hour = 2; }
+      @HourSep { @Hour = 3; }
+      @HourSep { @Hour = 4; }
+      @HourSep { @Hour = 5; }
+      @HourSep { @Hour = 6; }
+      @HourSep { @Hour = 7; }
+      @HourSep { @Hour = 8; }
+      @HourSep { @Hour = 9; }
+      @HourSep { @Hour = 10; }
+      @HourSep { @Hour = 11; }
+      @HourSep { @Hour = 12; }
+      @HourSep { @Hour = 13; }
+      @HourSep { @Hour = 14; }
+      @HourSep { @Hour = 15; }
+      @HourSep { @Hour = 16; }
+      @HourSep { @Hour = 17; }
+      @HourSep { @Hour = 18; }
+      @HourSep { @Hour = 19; }
+      @HourSep { @Hour = 20; }
+      @HourSep { @Hour = 21; }
+      @HourSep { @Hour = 22; }
+      @HourSep { @Hour = 23; }
+
+      @HourLabel { @Hour = 0; Text: "0"; }
+      @HourLabel { @Hour = 1; Text: "1"; }
+      @HourLabel { @Hour = 2; Text: "2"; }
+      @HourLabel { @Hour = 3; Text: "3"; }
+      @HourLabel { @Hour = 4; Text: "4"; }
+      @HourLabel { @Hour = 5; Text: "5"; }
+      @HourLabel { @Hour = 6; Text: "6"; }
+      @HourLabel { @Hour = 7; Text: "7"; }
+      @HourLabel { @Hour = 8; Text: "8"; }
+      @HourLabel { @Hour = 9; Text: "9"; }
+      @HourLabel { @Hour = 10; Text: "10"; }
+      @HourLabel { @Hour = 11; Text: "11"; }
+      @HourLabel { @Hour = 12; Text: "12"; }
+      @HourLabel { @Hour = 13; Text: "13"; }
+      @HourLabel { @Hour = 14; Text: "14"; }
+      @HourLabel { @Hour = 15; Text: "15"; }
+      @HourLabel { @Hour = 16; Text: "16"; }
+      @HourLabel { @Hour = 17; Text: "17"; }
+      @HourLabel { @Hour = 18; Text: "18"; }
+      @HourLabel { @Hour = 19; Text: "19"; }
+      @HourLabel { @Hour = 20; Text: "20"; }
+      @HourLabel { @Hour = 21; Text: "21"; }
+      @HourLabel { @Hour = 22; Text: "22"; }
+      @HourLabel { @Hour = 23; Text: "23"; }
+
+      Group #TimeMarker {
+        Anchor: (Width: 17, Height: 30, Bottom: 3, Left: 0);
+        Background: "WeatherDaytimeBarPositionMarker.png";
+      }
+
+      Group {
+        Anchor: (Height: 3, Bottom: 0);
+        Background: #ffffff(0.3);
+      }
+    }
+  }
+}

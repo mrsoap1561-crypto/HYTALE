@@ -1,0 +1,89 @@
+$AssetEditor = "../Common.ui";
+
+Group {
+  Background: #353535(0.8);
+  LayoutMode: Middle;
+
+  Group {
+    Background: #000000(0.8);
+    OutlineSize: 1;
+    OutlineColor: #ffffff(0.2);
+    Anchor: (Width: 500);
+    LayoutMode: Top;
+    Padding: (Full: 12);
+
+    Label #TitleLabel {
+      Style: (RenderBold: true, RenderUppercase: true);
+    }
+
+    Label #TextLabel {
+      Anchor: (Top: 10);
+      Style: (Wrap: true, FontSize: 13);
+    }
+
+    Group #DangerTextContainer {
+      Anchor: (Top: 10);
+      Background: #8B0000(0.3);
+      OutlineSize: 1;
+      OutlineColor: #FF4444(0.8);
+      Padding: 10;
+
+      Label #DangerTextLabel {
+        Style: (Wrap: true, FontSize: 13, TextColor: #FF6666);
+      }
+    }
+
+    Group #ConfirmationInputContainer {
+      Anchor: (Top: 10);
+      LayoutMode: Top;
+
+      Label #ConfirmationInputLabel {
+        Anchor: (Bottom: 6);
+        Style: (Wrap: true, FontSize: 12, TextColor: #cccccc);
+      }
+
+      TextField #ConfirmationInput {
+        Anchor: (Height: 28);
+        Style: (FontSize: 13);
+        PlaceholderStyle: (RenderItalics: true, TextColor: #747474);
+        Background: #ffffff(0.1);
+        OutlineSize: 1;
+        OutlineColor: #ffffff(0.2);
+        Padding: (Horizontal: 7);
+      }
+    }
+
+    CheckBoxContainer #ApplyChangesLocallyContainer {
+      LayoutMode: Left;
+      Anchor: (Top: 9);
+      Background: #ffffff(0.1);
+      OutlineSize: 1;
+      OutlineColor: #ffffff(0.2);
+      Padding: 8;
+
+      CheckBox #ApplyChangesLocally {
+        Style: $AssetEditor.@CheckBoxStyle;
+        Anchor: (Width: 16, Height: 16, Right: 7);
+      }
+
+      Label {
+        Text: %client.assetEditor.modal.applyChangesLocally;
+        Style: (FontSize: 12, TextColor: #dddddd);
+      }
+    }
+
+    Group {
+      Anchor: (Top: 12);
+      LayoutMode: Right;
+
+      $AssetEditor.@PrimaryTextButton #ConfirmationButton {
+        @Anchor = (Right: 5);
+        Text: %client.general.button.confirm;
+      }
+
+      $AssetEditor.@TextButton #CancelButton {
+        Text: %client.general.button.cancel;
+      }
+    }
+  }
+}

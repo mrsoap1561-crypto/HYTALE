@@ -1,0 +1,543 @@
+$AssetEditor = "../Common.ui";
+
+@PopupMenuLayerStyle = PopupMenuLayerStyle(
+  Background: #2e2e2e(0.9),
+  Padding: 4,
+  BaseHeight: 8,
+  MaxWidth: 250,
+  TitleStyle: (RenderBold: true, FontSize: 13, TextColor: #ffffff),
+  RowHeight: 25,
+  ItemLabelStyle: (RenderBold: true, FontSize: 11, TextColor: #ffffff(0.8)),
+  ItemPadding: (Vertical: 5, Horizontal: 8),
+  ItemIconSize: 16,
+  HoveredItemBackground: #ffffff(0.1),
+  PressedItemBackground: #ffffff(0.05)
+);
+
+@TooltipStyle = (
+  Padding: (Horizontal: 7, Vertical: 5),
+  MaxWidth: 450,
+  LabelStyle: (FontSize: 14, Wrap: true)
+);
+
+@AssetTreeTooltipStyle = (
+  Padding: 5,
+  Background: #000000(0.5),
+  LabelStyle: (
+    FontSize: 12,
+    TextColor: #cccccc
+  )
+);
+
+@FooterButton = TextButton {
+  Padding: (Horizontal: 10);
+  Style: (
+    Default: (
+      LabelStyle: (VerticalAlignment: Center, FontSize: 14, TextColor: #ffffff(0.75))
+    ),
+    Hovered: (
+      Background: #ffffff(0.1),
+      LabelStyle: (VerticalAlignment: Center, FontSize: 14, TextColor: #ffffff(0.75))
+    ),
+    Pressed: (
+      Background: #ffffff(0.05),
+      LabelStyle: (VerticalAlignment: Center, FontSize: 14, TextColor: #ffffff(0.75))
+    )
+  );
+};
+
+DynamicPaneContainer #RootContainer {
+  LayoutMode: Top;
+  Anchor: (Left: 0);
+
+  Group #AssetPathWarning {
+    Background: #c72e2e;
+    Padding: (Horizontal: 16, Vertical: 12);
+    LayoutMode: Top;
+    Visible: false;
+
+    Label {
+      Text: "Warning: You have not set up an asset directory. This is where assets will be exported to and this should usually be your git directory.";
+      Style: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center);
+    }
+
+    Group {
+      LayoutMode: Left;
+      Anchor: (Top: 15);
+
+      TextButton #AssetPathWarningOpenSettings {
+        Text: "Open Settings";
+        Padding: (Vertical: 10, Horizontal: 16);
+        Anchor: (Right: 7);
+        Style: (
+          Default: (
+            Background: #000000(0.3)
+          )
+        );
+      }
+
+      TextButton #AssetPathWarningDismiss {
+        Text: "Dismiss";
+        Padding: (Vertical: 10, Horizontal: 16);
+        Style: (
+          Default: (
+            Background: #000000(0.1)
+          )
+        );
+      }
+    }
+  }
+
+  Group {
+    Anchor: (Height: 42);
+    Background: #d4d3d3;
+
+    Group {
+      Anchor: (Height: 2, Bottom: 0);
+      Background: #ffffff(0.6);
+    }
+
+    Group #TopBar {
+      LayoutMode: Left;
+
+      Group #Tabs {
+        LayoutMode: LeftScrolling;
+        MouseWheelScrollBehaviour: HorizontalOnly;
+        ScrollbarStyle: (
+          Spacing: 0,
+          Size: 2,
+          Handle: #000000(0.7),
+          HoveredHandle: #000000(0.9),
+          DraggedHandle: #000000(0.8),
+          OnlyVisibleWhenHovered: true
+        );
+        FlexWeight: 1;
+      }
+
+      TabNavigation #Mode {
+        @StyleState = (
+          LabelStyle: (VerticalAlignment: Center, FontSize: 14),
+          Padding: (Horizontal: 10)
+        );
+
+        Padding: (Full: 3);
+        Background: #000000(0.2);
+        Anchor: (Full: 3, Bottom: 5);
+        Style: (
+          TabStyle: (
+            Default: @StyleState,
+            Hovered: (
+              ...@StyleState,
+              Background: #000000(0.05)
+            ),
+            Pressed: (
+              ...@StyleState,
+              Background: #000000(0.03)
+            )
+          ),
+          SelectedTabStyle: (
+            Default: (
+              ...@StyleState,
+              Background: #000000(0.2)
+            )
+          )
+        );
+
+        TabButton {
+          Text: %client.assetEditor.mode.editor;
+          Id: "Editor";
+        }
+
+        TabButton {
+          Text: %client.assetEditor.mode.source;
+          Id: "Source";
+        }
+      }
+
+      Button #ExportButton {
+        Anchor: (Width: 40, Left: 1, Bottom: 2);
+        Padding: (Full: 10);
+        Visible: false;
+        Style: (
+          Default: (
+            Background: #000000(0.1)
+          )
+        );
+
+        Group {
+          Background: (TexturePath: "ExportIcon.png", Color: #000000(0.7));
+        }
+
+        Group {
+          LayoutMode: Right;
+          Anchor: (Right: -7, Bottom: -15);
+
+          Label #ModifiedAssetsCountLabel {
+            Visible: false;
+            Background: #a82f43;
+            Style: (TextColor: #ffffff, RenderBold: true, FontSize: 12, VerticalAlignment: Center);
+            Padding: (Horizontal: 3);
+            Anchor: (Height: 16);
+          }
+        }
+      }
+
+      Button #OptionsButton {
+        Anchor: (Width: 40, Left: 1, Bottom: 2);
+        Padding: (Full: 8);
+        Style: (
+          Default: (
+            Background: #000000(0.1)
+          )
+        );
+
+        Group {
+          Background: (TexturePath: "OptionsIcon.png", Color: #000000(0.7));
+        }
+      }
+    }
+  }
+
+  DynamicPaneContainer #Main {
+    FlexWeight: 1;
+    LayoutMode: Left;
+    Anchor: (MinWidth: 50);
+
+    DynamicPane #AssetBrowserPane {
+      Anchor: (Width: 300);
+      LayoutMode: Top;
+      Background: #4f4f4e;
+      ResizeAt: End;
+      ResizerSize: 2;
+      ResizerBackground: #363636;
+
+      Group {
+        LayoutMode: Left;
+
+        DropdownBox #AssetPackDropdownBox {
+          Style: $AssetEditor.@DropdownBoxStyle;
+          ShowSearchInput: true;
+          Anchor: (Height: 32);
+          FlexWeight: 1;
+        }
+
+        TextButton #ManagePacksButton {
+          Text: "...";
+          Anchor: (Width: 32);
+          Style: (
+            Default: (
+              Background: #000000(0.3),
+              LabelStyle: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center, HorizontalAlignment: Center, FontSize: 14)
+            )
+          );
+          TooltipText: "Manage Packs";
+        }
+      }
+
+      TextField #SearchInput {
+        Anchor: (Height: 38);
+        PlaceholderText: %client.assetEditor.assetBrowser.searchAssetsPlaceholder;
+        PlaceholderStyle: (
+          TextColor: #ffffff(0.4),
+          RenderItalics: true,
+          FontSize: 14
+        );
+        Style: (FontSize: 14);
+        Padding: (Full: 9, Left: 27);
+        Decoration: (
+          Default: (
+            Background: #ffffff(0.1),
+            Icon: (Texture: (TexturePath: "../Common/SearchIcon.png", Color: #ffffff(0.25)), Width: 14, Height: 14, Offset: 7),
+            ClearButtonStyle: $AssetEditor.@ClearButtonStyle
+          ),
+          Focused: (
+            Background: #ffffff(0.2),
+            OutlineSize: 1,
+            OutlineColor: #cdf0fc(0.81),
+            Icon: (Texture: (TexturePath: "../Common/SearchIcon.png", Color: #def7fc(0.65)), Width: 14, Height: 14, Offset: 7)
+          )
+        );
+      }
+
+      Group {
+        Anchor: (Height: 32);
+        Background: #000000(0.3);
+        LayoutMode: Left;
+
+        TabNavigation #RootFolderSelection {
+          @StyleState = (
+            LabelStyle: (Alignment: Center, FontSize: 14),
+            Padding: (Horizontal: 10)
+          );
+
+          Anchor: (Height: 32);
+          Background: #333333;
+          Style: (
+            TabStyle: (
+              Default: @StyleState,
+              Hovered: (
+                ...@StyleState,
+                Background: #000000(0.2)
+              ),
+              Pressed: (
+                ...@StyleState,
+                Background: #000000(0.15)
+              )
+            ),
+            SelectedTabStyle: (
+              Default: (
+                ...@StyleState,
+                Background: #000000(0.5),
+              )
+            )
+          );
+        }
+
+        Group {
+          FlexWeight: 1;
+        }
+
+        Button #CollapseAllButton {
+          Anchor: (Width: 32);
+          Style: (
+            Hovered: (
+              Background: #000000(0.2)
+            ),
+            Pressed: (
+              Background: #000000(0.1)
+            )
+          );
+          TooltipText: %client.assetEditor.assetBrowser.tooltips.collapseAll;
+
+          Group {
+            Anchor: (Width: 10, Height: 10);
+            Background: "../Common/CaretUncollapsed.png";
+          }
+        }
+
+        Button #FilterButton {
+          Anchor: (Width: 32);
+          Style: (
+            Hovered: (
+              Background: #000000(0.2)
+            ),
+            Pressed: (
+              Background: #000000(0.1)
+            )
+          );
+          TooltipText: %client.assetEditor.assetBrowser.tooltips.filter;
+
+          Group {
+            Anchor: (Width: 24, Height: 24);
+            Background: "FilterIcon.png";
+          }
+        }
+
+        TextButton #NewAssetButton {
+          @LabelStyle = (
+            Alignment: Center,
+            RenderBold: true,
+            FontSize: 22
+          );
+
+          TooltipText: %client.assetEditor.assetBrowser.tooltips.createNewAsset;
+          Text: "+";
+          Anchor: (Width: 32);
+          Style: (
+            Default: (
+              LabelStyle: @LabelStyle
+            ),
+            Hovered: (
+              LabelStyle: @LabelStyle,
+              Background: #000000(0.2)
+            ),
+            Pressed: (
+              LabelStyle: @LabelStyle,
+              Background: #000000(0.1)
+            )
+          );
+        }
+      }
+
+      Group #AssetBrowserSpinner {
+        Anchor: (Height: 300);
+        Visible: false;
+
+        $AssetEditor.@Spinner {}
+      }
+    }
+
+    DynamicPane #ContentPane {
+      LayoutMode: Top;
+      FlexWeight: 1;
+      Background: #444444;
+
+      Group #ReadOnlyWarning {
+        Background: #c7662e;
+        Padding: (Left: 8, Right: 4);
+        Anchor: (Height: 32);
+        LayoutMode: Left;
+
+        Label {
+          Text: %client.assetEditor.readOnlyAssetBar.message;
+          Style: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center);
+          FlexWeight: 1;
+        }
+
+        TextButton #OverrideAssetButton {
+          Text: %client.assetEditor.readOnlyAssetBar.overrideButton;
+          Padding: (Horizontal: 10);
+          Anchor: (Height: 24, Right: 4);
+          Style: (
+            Default: (
+              Background: #000000(0.3),
+              LabelStyle: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center, FontSize: 14)
+            )
+          );
+        }
+
+        TextButton {
+          Text: "i";
+          Padding: (Horizontal: 10);
+          Anchor: (Height: 24);
+          Style: (
+            Default: (
+              Background: #000000(0.3),
+              LabelStyle: (TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center, FontSize: 14)
+            )
+          );
+          TooltipText: %client.assetEditor.readOnlyAssetBar.tooltip;
+        }
+      }
+
+      DynamicPaneContainer {
+        LayoutMode: Left;
+        FlexWeight: 1;
+
+        DynamicPane #ContextPane {
+          Anchor: (Width: $AssetEditor.@ContextPaneWidth);
+          ResizeAt: End;
+          ResizerSize: 2;
+          ResizerBackground: #363636;
+        }
+
+        DynamicPane #EditorPane {
+          FlexWeight: 1;
+          LayoutMode: Top;
+        }
+      }
+    }
+  }
+
+  DynamicPane #DiagnosticsPane {
+    Anchor: (Height: 250);
+    Background: #444444;
+    LayoutMode: TopScrolling;
+    ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+    ResizeAt: Start;
+    ResizerSize: 2;
+    ResizerBackground: #363636;
+  }
+
+  Group #Footer {
+    Anchor: (Height: 35);
+    Background: #2b2a2a;
+    LayoutMode: Left;
+
+    @FooterButton #AssetsSourceButton {
+      TooltipText: %client.assetEditor.backends.tooltip;
+    }
+
+    Group {
+      Anchor: (Width: 1);
+      Background: #ffffff(0.1);
+    }
+
+    Group #FileSaveStatus {
+      LayoutMode: Left;
+      Padding: (Horizontal: 10);
+
+      Label #Label {
+        Style: (VerticalAlignment: Center, FontSize: 14, TextColor: #ffffff(0.75));
+        Text: "Unsaved changes";
+      }
+    }
+
+    Group {
+      Anchor: (Width: 1);
+      Background: #ffffff(0.1);
+    }
+
+    @FooterButton #ChangelogButton {}
+
+    Group {
+      Anchor: (Width: 1);
+      Background: #ffffff(0.1);
+    }
+
+    Group { FlexWeight: 1; }
+
+    Button #ErrorsInfo {
+      LayoutMode: Left;
+      Padding: (Horizontal: 12);
+      Style: (
+        Default: (Background: #ca5b6a),
+        Hovered: (Background: #db7280),
+        Pressed: (Background: #d46574)
+      );
+
+      Group {
+        Anchor: (Width: 22, Height: 22, Right: 5);
+        Background: "ErrorIcon.png";
+      }
+
+      Label #Count {
+        Style: (
+          VerticalAlignment: Center,
+          RenderBold: true,
+          FontSize: 12
+        );
+        Text: "0";
+      }
+    }
+
+    Button #WarningsInfo {
+      LayoutMode: Left;
+      Padding: (Horizontal: 12);
+      Style: (
+        Default: (Background: #df9b73),
+        Hovered: (Background: #e4ab8b),
+        Pressed: (Background: #e9a47d)
+      );
+
+      Group {
+        Anchor: (Width: 22, Height: 22, Right: 5);
+        Background: "WarningIcon.png";
+      }
+
+      Label #Count {
+        Style: (
+          VerticalAlignment: Center,
+          RenderBold: true,
+          FontSize: 12
+        );
+        Text: "0";
+      }
+    }
+
+    Button #ValidatedInfo {
+      LayoutMode: Left;
+      Padding: (Horizontal: 12);
+      Style: (
+        Default: (Background: #a7df8d),
+        Hovered: (Background: #bdf0a6),
+        Pressed: (Background: #b3e999)
+      );
+
+      Group {
+        Anchor: (Width: 22, Height: 22);
+        Background: "SuccessIcon.png";
+      }
+    }
+  }
+}

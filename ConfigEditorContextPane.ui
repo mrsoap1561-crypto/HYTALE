@@ -1,0 +1,26 @@
+$AssetEditor = "../Common.ui";
+
+DynamicPaneContainer {
+  LayoutMode: Top;
+
+  Group #Buttons {
+    LayoutMode: Right;
+    Anchor: (Height: 35);
+    Background: #000000(0.3);
+    Padding: 3;
+  }
+
+  DynamicPane #PreviewGroup {
+    Anchor: (Height: 380);
+    ResizeAt: End;
+    ResizerSize: 2;
+    ResizerBackground: #363636;
+    MinSize: 25;
+  }
+
+  Group #Sections {
+    LayoutMode: TopScrolling;
+    FlexWeight: 1;
+    ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+  }
+}

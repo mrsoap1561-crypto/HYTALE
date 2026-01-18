@@ -1,0 +1,33 @@
+Button #Button {
+  LayoutMode: Left;
+  Padding: (Full: 5, Left: 8);
+  Style: (
+    Hovered: (
+      Background: #ffffff(0.1)
+    ),
+    Pressed: (
+      Background: #ffffff(0.05)
+    )
+  );
+
+  Group #Icon {
+    Anchor: (Width: 16, Height: 16, Right: 8);
+  }
+
+  Group {
+    LayoutMode: Top;
+
+    Label #File {
+      Style: (RenderBold: true, FontSize: 12);
+    }
+
+    Label #Message {
+      Style: (FontSize: 12);
+    }
+  }
+}
+
+Group {
+  Background: #ffffff(0.1);
+  Anchor: (Height: 1);
+}

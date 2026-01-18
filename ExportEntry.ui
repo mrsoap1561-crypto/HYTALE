@@ -1,0 +1,77 @@
+$AssetEditor = "../Common.ui";
+
+@DefaultStyle = (
+  Hovered: (Background: #ffffff(0.05)),
+  Pressed: (Background: #ffffff(0.02))
+);
+
+@SelectedStyle = (
+  Default: (Background: #ffffff(0.3)),
+  Hovered: (Background: #ffffff(0.4)),
+  Pressed: (Background: #ffffff(0.35))
+);
+
+@DiscardButtonLabelStyle = (
+  Alignment: Center,
+  RenderBold: true
+);
+
+@DeletedColor = #f1bcbc;
+@NewColor = #bef1bc;
+@RenamedColor = #bcedf1;
+@DefaultColor = #ffffff;
+
+Button #Button {
+  LayoutMode: Left;
+  Anchor: (Bottom: 3);
+  Padding: (Vertical: 2);
+  Style: @DefaultStyle;
+  TooltipText: %client.assetEditor.exportModal.tooltips.changed;
+
+  Group #DiagnosticsIcon {
+    Anchor: (Width: 24, Height: 24, Left: 10);
+    Visible: false;
+  }
+
+  Group #Icon {
+    Anchor: (Width: 22, Height: 22, Left: 10);
+  }
+
+  Label #NameLabel {
+    Anchor: (Left: 5);
+    Style: (FontSize: 12, VerticalAlignment: Center, TextColor: @DefaultColor);
+    FlexWeight: 1;
+  }
+
+  Label #DateLabel {
+    Style: (FontSize: 12, VerticalAlignment: Center);
+    Anchor: (Width: 160);
+  }
+
+  Label #UsernameLabel {
+    Style: (FontSize: 12, VerticalAlignment: Center);
+    Anchor: (Width: 130);
+  }
+
+  TextButton #DiscardButton {
+    Anchor: (Width: 24, Height: 24);
+    Text: "x";
+    Padding: (Bottom: 2);
+    Background: #ffffff(0.1);
+    TooltipText: %client.assetEditor.exportModal.discardButtonTooltip;
+    Style: (
+      Default: (
+        LabelStyle: @DiscardButtonLabelStyle,
+        Background: #ffffff(0.1)
+      ),
+      Hovered: (
+        LabelStyle: @DiscardButtonLabelStyle,
+        Background: #ffffff(0.2)
+      ),
+      Pressed: (
+        LabelStyle: @DiscardButtonLabelStyle,
+        Background: #ffffff(0.15)
+      )
+    );
+  }
+}

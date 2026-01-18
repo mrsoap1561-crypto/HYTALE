@@ -1,0 +1,7 @@
+$AssetEditor = "../Common.ui";
+
+Group {
+  FlexWeight: 1;
+
+  $AssetEditor.@Spinner {}
+}

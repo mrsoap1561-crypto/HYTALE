@@ -1,0 +1,59 @@
+CheckBox #TogglePauseTime {
+  Anchor: (Width: 32, Height: 32);
+  Style: (
+    Unchecked: (
+      DefaultBackground: (TexturePath: "WeatherDaytimeBarPauseIcon.png", Color: #ffffff(0.8)),
+      HoveredBackground: (TexturePath: "WeatherDaytimeBarPauseIcon.png", Color: #ffffff(1)),
+      PressedBackground: (TexturePath: "WeatherDaytimeBarPauseIcon.png", Color: #ffffff(0.9)),
+    ),
+    Checked: (
+      DefaultBackground: (TexturePath: "WeatherDaytimeBarPlayIcon.png", Color: #ffffff(0.8)),
+      HoveredBackground: (TexturePath: "WeatherDaytimeBarPlayIcon.png", Color: #ffffff(1)),
+      PressedBackground: (TexturePath: "WeatherDaytimeBarPlayIcon.png", Color: #ffffff(0.9)),
+    )
+  );
+  TooltipText: %client.assetEditor.weatherDaytimeBar.togglePauseTime;
+}
+
+Button #PreviousDay {
+  Anchor: (Width: 32, Height: 32);
+  Style: (
+    Default: (Background: (TexturePath: "WeatherDaytimeBarPreviousIcon.png", Color: #ffffff(0.8))),
+    Hovered: (Background: (TexturePath: "WeatherDaytimeBarPreviousIcon.png", Color: #ffffff(1))),
+    Pressed: (Background: (TexturePath: "WeatherDaytimeBarPreviousIcon.png", Color: #ffffff(0.9))),
+  );
+  TooltipText: %client.assetEditor.weatherDaytimeBar.previousDay;
+}
+
+Button #NextDay {
+  Anchor: (Width: 32, Height: 32);
+  Style: (
+    Default: (Background: (TexturePath: "WeatherDaytimeBarNextIcon.png", Color: #ffffff(0.8))),
+    Hovered: (Background: (TexturePath: "WeatherDaytimeBarNextIcon.png", Color: #ffffff(1))),
+    Pressed: (Background: (TexturePath: "WeatherDaytimeBarNextIcon.png", Color: #ffffff(0.9))),
+  );
+  TooltipText: %client.assetEditor.weatherDaytimeBar.nextDay;
+}
+
+CheckBox #LockTimeAndWeather {
+  Anchor: (Width: 32, Height: 32);
+  Style: (
+    Checked: (
+      DefaultBackground: (TexturePath: "WeatherDaytimeBarLockedIcon.png", Color: #ffffff(0.8)),
+      HoveredBackground: (TexturePath: "WeatherDaytimeBarLockedIcon.png", Color: #ffffff(1)),
+      PressedBackground: (TexturePath: "WeatherDaytimeBarLockedIcon.png", Color: #ffffff(0.9)),
+    ),
+    Unchecked: (
+      DefaultBackground: (TexturePath: "WeatherDaytimeBarLockIcon.png", Color: #ffffff(0.8)),
+      HoveredBackground: (TexturePath: "WeatherDaytimeBarLockIcon.png", Color: #ffffff(1)),
+      PressedBackground: (TexturePath: "WeatherDaytimeBarLockIcon.png", Color: #ffffff(0.9)),
+    )
+  );
+  TooltipText: %client.assetEditor.weatherDaytimeBar.lockTimeAndWeather;
+}
+
+Label #CurrentDay {
+  FlexWeight: 1;
+  Anchor: (Horizontal: 5);
+  Style: (FontSize: 13, Alignment: Center);
+}

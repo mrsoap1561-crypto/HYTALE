@@ -1,0 +1,71 @@
+$AssetEditor = "../Common.ui";
+
+@SmallInputField = TextField {
+  PlaceholderStyle: (RenderItalics: true, TextColor: #747474, FontSize: 11);
+  Style: (FontSize: 11);
+  Anchor: (Height: 26);
+  Background: #000000(0.3);
+  Padding: (Horizontal: 5);
+};
+
+Group #AuthorEntry {
+  LayoutMode: Top;
+  Background: #ffffff(0.05);
+  Padding: (Full: 8);
+  Anchor: (Bottom: 5);
+  OutlineSize: 1;
+  OutlineColor: #ffffff(0.1);
+
+  Group {
+    LayoutMode: Left;
+    Anchor: (Bottom: 5);
+
+    Label {
+      Text: %client.assetEditor.packModal.authors.entry;
+      Style: (FontSize: 11, TextColor: #aaaaaa, RenderBold: true, VerticalAlignment: Center);
+      FlexWeight: 1;
+    }
+
+    TextButton #RemoveButton {
+      Text: "×";
+      Anchor: (Width: 24, Height: 24);
+      Style: (
+        Default: (
+          Background: #aa4444(0.5),
+          LabelStyle: (FontSize: 14, RenderBold: true, Alignment: Center)
+        ),
+        Hovered: (
+          Background: #cc5555(0.7),
+          LabelStyle: (FontSize: 14, RenderBold: true, Alignment: Center)
+        ),
+        Pressed: (
+          Background: #aa4444(0.6),
+          LabelStyle: (FontSize: 14, RenderBold: true, Alignment: Center)
+        )
+      );
+    }
+  }
+
+  Group {
+    LayoutMode: Left;
+    Anchor: (Bottom: 3);
+
+    @SmallInputField #AuthorNameInput {
+      PlaceholderText: %client.assetEditor.packModal.authors.name.placeholder;
+      FlexWeight: 1;
+      Anchor: (Height: 26, Right: 3);
+    }
+
+    @SmallInputField #AuthorEmailInput {
+      PlaceholderText: %client.assetEditor.packModal.authors.email.placeholder;
+      FlexWeight: 1;
+      Anchor: (Height: 26, Right: 3);
+    }
+
+    @SmallInputField #AuthorUrlInput {
+      PlaceholderText: %client.assetEditor.packModal.authors.url.placeholder;
+      FlexWeight: 1;
+      Anchor: (Height: 26);
+    }
+  }
+}

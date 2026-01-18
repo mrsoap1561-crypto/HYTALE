@@ -1,0 +1,23 @@
+@LabelStyle = (VerticalAlignment: Center, FontSize: 13, TextColor: #dddddd);
+@Style = (
+  Default: (LabelStyle: @LabelStyle),
+  Hovered: (LabelStyle: @LabelStyle, Background: #ffffff(0.1)),
+  Pressed: (LabelStyle: @LabelStyle, Background: #ffffff(0.05))
+);
+@ActiveStyle = (
+  Default: (LabelStyle: (...@LabelStyle, TextColor: #ffffff), Background: #ffffff(0.2))
+);
+
+Group {
+  Anchor: (Height: 24);
+
+  TextButton #Button {
+    Padding: (Left: 10);
+    Style: @Style;
+  }
+
+  Group #Icon {
+    Anchor: (Height: 9, Width: 9, Left: 12);
+    Background: "ConfigEditorContextPaneCategoryIcon.png";
+  }
+}

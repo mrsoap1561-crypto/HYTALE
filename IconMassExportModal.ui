@@ -1,0 +1,96 @@
+$AssetEditor = "../Common.ui";
+
+Group #Overlay {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 500);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+      Text: %client.assetEditor.iconMassExportModal.title;
+    }
+
+    Group {
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+      FlexWeight: 1;
+
+      Group {
+        LayoutMode: Left;
+        Anchor: (Bottom: 5);
+
+        Label {
+          Text: %client.assetEditor.iconMassExportModal.iconSize;
+          Anchor: (Right: 10);
+          Style: (
+            RenderBold: true,
+            FontSize: 13,
+            VerticalAlignment: Center
+          );
+        }
+
+        NumberField #Scale {
+          PlaceholderStyle: (RenderItalics: true, TextColor: #747474);
+          Anchor: (Height: 32, Bottom: 5);
+          FlexWeight: 1;
+          Background: #000000(0.3);
+          Padding: (Horizontal: 7);
+          Format: (
+            Suffix: "px"
+          );
+        }
+      }
+
+      Group {
+        LayoutMode: Left;
+        Padding: 10;
+
+        Label {
+          Text: %client.assetEditor.iconMassExportModal.statusLabel;
+          Style: (FontSize: 12);
+          Anchor: (Right: 5);
+        }
+
+        Label #StatusLabel {
+          Style: (FontSize: 12);
+          FlexWeight: 1;
+        }
+      }
+
+      Group {
+        LayoutMode: Left;
+        Anchor: (Top: 10);
+        Background: #ffffff(0.1);
+        Padding: (Full: 10);
+
+        Group {
+          FlexWeight: 1;
+        }
+
+        $AssetEditor.@PrimaryTextButton #StartButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.assetEditor.iconMassExportModal.startButton;
+        }
+
+        $AssetEditor.@TextButton #CancelButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.general.button.cancel;
+        }
+
+        $AssetEditor.@TextButton #CloseButton {
+          @Anchor = (MinWidth: 150);
+          Text: %client.general.button.close;
+        }
+      }
+    }
+  }
+}

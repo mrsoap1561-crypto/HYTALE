@@ -1,0 +1,88 @@
+$AssetEditor = "../Common.ui";
+
+Group #Overlay {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 1100);
+    Background: #000000(0.8);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+      Text: %client.assetEditor.filterModal.title;
+    }
+
+
+    Group {
+      Anchor: (Height: 550);
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+      FlexWeight: 1;
+
+      TextField #SearchInput {
+        Anchor: (Height: 38, Bottom: 8);
+        PlaceholderText: %client.assetEditor.filterModal.searchPlaceholder;
+        AutoFocus: true;
+        PlaceholderStyle: (
+          TextColor: #ffffff(0.4),
+          RenderItalics: true,
+          FontSize: 14
+        );
+        Style: (FontSize: 14);
+        Padding: (Full: 9, Left: 27);
+        Decoration: (
+          Default: (
+            Background: #ffffff(0.1),
+            Icon: (Texture: (TexturePath: "SearchIcon.png", Color: #ffffff(0.25)), Width: 14, Height: 14, Offset: 7),
+            ClearButtonStyle: $AssetEditor.@ClearButtonStyle
+          ),
+          Focused: (
+            Background: #ffffff(0.2),
+            OutlineSize: 1,
+            OutlineColor: #cdf0fc(0.81),
+            Icon: (Texture: (TexturePath: "SearchIcon.png", Color: #def7fc(0.65)), Width: 14, Height: 14, Offset: 7)
+          )
+        );
+      }
+
+      Group #Entries {
+        FlexWeight: 1;
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $AssetEditor.@ScrollbarStyle;
+      }
+
+      Group {
+        LayoutMode: Left;
+        Anchor: (Top: 10);
+        Background: #ffffff(0.1);
+        Padding: (Full: 10);
+
+        $AssetEditor.@TextButton #DeselectAllButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.assetEditor.exportModal.deselectAllButton;
+        }
+
+        $AssetEditor.@TextButton #SelectAllButton {
+          @Anchor = (Right: 5, MinWidth: 150);
+          Text: %client.assetEditor.exportModal.selectAllButton;
+        }
+
+        Group {
+          FlexWeight: 1;
+        }
+
+        $AssetEditor.@TextButton #CloseButton {
+          @Anchor = (MinWidth: 150);
+          Text: %client.general.button.close;
+        }
+      }
+    }
+  }
+}

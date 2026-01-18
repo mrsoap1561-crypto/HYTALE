@@ -1,0 +1,85 @@
+$AssetEditor = "../Common.ui";
+
+Group {
+  Background: #a3a3a3(0.7);
+  LayoutMode: Middle;
+
+  Group #Container {
+    Anchor: (Width: 500);
+    Background: #000000(0.8);
+    OutlineSize: 1;
+    OutlineColor: #ffffff(0.2);
+    LayoutMode: Top;
+    Padding: (Full: 2);
+
+    Label #Title {
+      Anchor: (Height: 40, Bottom: 1);
+      Style: (VerticalAlignment: Center, RenderBold: true, RenderUppercase: true);
+      Padding: (Left: 12);
+      Background: #757474(0.9);
+    }
+
+    Group {
+      Background: #414141(0.9);
+      LayoutMode: Top;
+      Padding: (Full: 12);
+
+      Label #ErrorMessage {
+        Padding: (Full: 5);
+        Style: (FontSize: 13, RenderBold: true, Wrap: true);
+        Background: #813131;
+        Anchor: (Bottom: 5);
+      }
+
+      TextField #Input {
+        PlaceholderStyle: (RenderItalics: true, TextColor: #747474);
+        Anchor: (Height: 32, Bottom: 5);
+        Background: #000000(0.3);
+        Padding: (Horizontal: 7);
+      }
+
+      Label {
+        Anchor: (Top: 9);
+        Text: %client.assetEditor.renameModal.warning;
+        Background: #fadd7d(0.71);
+        OutlineSize: 1;
+        OutlineColor: #ff822f(0.68);
+        Padding: 8;
+        Style: (FontSize: 12, TextColor: #3a2505, Wrap: true, RenderBold: true);
+      }
+
+      CheckBoxContainer #ApplyChangesLocallyContainer {
+        LayoutMode: Left;
+        Anchor: (Top: 9);
+        Background: #ffffff(0.1);
+        OutlineSize: 1;
+        OutlineColor: #ffffff(0.2);
+        Padding: 8;
+
+        CheckBox #ApplyChangesLocally {
+          Style: $AssetEditor.@CheckBoxStyle;
+          Anchor: (Width: 16, Height: 16, Right: 7);
+        }
+
+        Label {
+          Text: %client.assetEditor.modal.applyChangesLocally;
+          Style: (FontSize: 12, TextColor: #dddddd);
+        }
+      }
+
+      Group {
+        LayoutMode: Right;
+        Anchor: (Top: 10);
+
+        $AssetEditor.@PrimaryTextButton #SaveButton {
+          @Anchor = (Right: 5);
+          Text: %client.assetEditor.renameModal.renameButton;
+        }
+
+        $AssetEditor.@TextButton #CancelButton {
+          Text: %client.general.button.cancel;
+        }
+      }
+    }
+  }
+}
