@@ -1,0 +1,10 @@
+$AssetEditor = "../Common.ui";
+$Setting = "Setting.ui";
+
+$Setting.@Row {
+  #Value {
+    DropdownBox #Dropdown {
+      Style: $AssetEditor.@DropdownBoxStyle;
+    }
+  }
+}

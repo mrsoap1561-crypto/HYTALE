@@ -1,0 +1,11 @@
+$AssetEditor = "../Common.ui";
+$Setting = "Setting.ui";
+
+$Setting.@Row {
+  #Value {
+    CheckBox #CheckBox {
+      Style: $AssetEditor.@CheckBoxStyle;
+      Anchor: (Width: 24, Height: 24, Left: 7);
+    }
+  }
+}

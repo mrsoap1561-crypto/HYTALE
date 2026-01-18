@@ -1,0 +1,11 @@
+$AssetEditor = "../Common.ui";
+$Setting = "Setting.ui";
+
+@FileDropdownBoxStyle = $AssetEditor.@FileDropdownBoxStyle;
+@FileDropdownTemplate = "../AssetEditor/FileSelector.ui";
+
+$Setting.@Row {
+  #Value {
+    Group #FileSelectorContainer {}
+  }
+}

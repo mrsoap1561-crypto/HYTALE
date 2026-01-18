@@ -1,0 +1,24 @@
+@Row = Group {
+  LayoutMode: Left;
+  Anchor: (Height: 40, Bottom: 1);
+  Background: #181818(0.2);
+
+  Label #Name {
+    Anchor: (Width: 250);
+    Padding: (Horizontal: 8);
+    Style: (
+      VerticalAlignment: Center,
+      FontSize: 13,
+      TextColor: #d6d6d6
+    );
+  }
+
+  Group {
+    Anchor: (Width: 1);
+    Background: #000000(0.2);
+  }
+
+  Group #Value {
+    FlexWeight: 1;
+  }
+};

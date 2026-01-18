@@ -1,0 +1,8 @@
+$Common = "../Common.ui";
+
+$Common.@Modal {
+  @Width = 700;
+
+  #Title { Text: %client.assetEditor.settings.title; }
+  #CloseButton { Visible: true; }
+}
